@@ -15,6 +15,9 @@
       <h6 class="card-subtitle mb-2 text-muted">System:
         <a href="{% url 'books:books_by_system' book.system.slug %}">{{book.system}}</a>
       </h6>
+      <h6 class="card-subtitle mb-2 text-muted">Book type:
+        <a href="{% url 'books:books_by_book_type' book.book_type %}">{{book.display_book_type}}</a>
+      </h6>
       <p class="card-text">Tags:
       <ul class="list-inline">
         {% for tag in book.tags.all %}
