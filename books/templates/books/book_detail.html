@@ -23,7 +23,7 @@
   </tr>
   <tr>
     <td>Type</td>
-    <td>{{book.display_book_type}}</td>
+    <td><a href="{% url 'books:books_by_book_type' book.book_type %}">{{book.display_book_type}}</a></td>
   </tr>
   <tr>
     <td>Tags</td>
