@@ -7,12 +7,10 @@
 
 
 {% if book.cover %}
-<h2>Cover</h2>
 <img class="rounded img-fluid portrait" src="{% get_media_prefix %}{{book.cover}}" alt="Cover of {{book.title}}.">
 {% endif %}
 
 <hr>
-<h2>Blurb</h2>
 {{book.blurb|safe}}
 
 <hr>
@@ -39,7 +37,7 @@
 <hr>
 
 {% if book.want_to_run %}
-<h2>Want to run </h2>
+<h5>Want to run </h5>
 ✅
 {% endif %}
 {% endblock %}
