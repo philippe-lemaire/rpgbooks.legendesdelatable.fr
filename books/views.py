@@ -19,7 +19,12 @@ class BooksIndexView(ListView):
     paginate_by = 10
 
 
-# template_name = "books/books_list.html"
+def books_by_system_view(request, slug):
+    system = System.objects.filter(slug=slug)[0]
+    queryset = Book.objects.filter(system=system)
+    template_name = "books/book_list.html"
+    context = {"books": queryset}
+    return render(request, template_name, context)
 
 
 class BookDetailView(DetailView):
