@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}My RPG Books{% endblock title %}
+{% block content %}
+<h1>My RPG Books</h1>
+
+
+<ul>
+  {% for book in books %}
+
+  <li>{{book.title}} <a href="{% url 'books:book_detail' book.slug %}">See book detail</a></li>
+
+  {% endfor %}
+</ul>
+{% endblock %}

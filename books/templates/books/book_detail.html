@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}{{book.title}}{% endblock title %}
+{% block content %}
+<h1>{{book.title}}</h1>
+
+
+{{book.blurb|safe}}
+
+{% if book.cover %}
+<img class="rounded float-right img-fluid portrait" width=150 src="{% get_media_prefix %}{{book.cover}}"
+  alt="Cover of {{book.title}}.">
+{% endif %}
+{% endblock %}
