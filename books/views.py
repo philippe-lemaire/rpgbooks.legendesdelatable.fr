@@ -23,15 +23,16 @@ def books_by_system_view(request, slug):
     system = System.objects.filter(slug=slug)[0]
     queryset = Book.objects.filter(system=system)
     template_name = "books/book_list.html"
-    context = {"books": queryset}
+    context = {"books": queryset, "filtered_by": f"System: {system}"}
     return render(request, template_name, context)
 
 
 def books_by_tag_view(request, slug):
-    tag = Tag.objects.filter(slug=slug)[0].slug
-    queryset = Book.objects.filter(tags__slug=tag)
+    tag = Tag.objects.filter(slug=slug)[0]
+    slug = tag.slug
+    queryset = Book.objects.filter(tags__slug=slug)
     template_name = "books/book_list.html"
-    context = {"books": queryset}
+    context = {"books": queryset, "filtered_by": f"Tag: {tag}"}
     return render(request, template_name, context)
 
 

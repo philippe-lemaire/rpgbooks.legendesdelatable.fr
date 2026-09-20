@@ -4,6 +4,8 @@
 {% block title %}My RPG Books{% endblock title %}
 {% block content %}
 <h1>My RPG Books</h1>
+{% if filtered_by %}<p class="text-muted">Filtered by {{filtered_by}}<br><a href="{% url 'books:index' %}">See all
+    books</a></p>{% endif %}
 
 <div class="row mt-5">
   {% for book in books %}
