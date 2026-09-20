@@ -23,37 +23,45 @@
 <body>
   <header>
     {% block navbar %}
-    <!--newnav-->
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-          aria-expanded="false">Books</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="{% url 'books:index' %}">All Books</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">My RPG Books</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Books
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'books:index' %}">All books</a>
+              <a class="dropdown-item" href="#">Games I want to run</a>
 
-        </div>
-      </li>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'books:systems_list' %}">Systems</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'books:tags_list' %}">Tags</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+          </li>
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:logout' %}">Déconnexion</a>
+          </li>
+          {% endif %}
 
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'books:systems_list' %}">Systems</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'books:tags_list' %}">Tags</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
-      </li>
-      {% if request.user.is_authenticated %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'admin:logout' %}">Déconnexion</a>
-      </li>
-      {% endif %}
-    </ul>
-    <!--end newnav-->
+      </div>
+    </nav>
+
     {% endblock %}
     {% block subbar %}{% endblock subbar %}
   </header>
