@@ -7,9 +7,8 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login
-from django.conf import settings
 
-from .models import Book
+from .models import Book, System, Tag
 
 # Create your views here.
 
@@ -25,3 +24,11 @@ class BooksIndexView(ListView):
 
 class BookDetailView(DetailView):
     model = Book
+
+
+class SystemsListView(ListView):
+    model = System
+
+
+class TagsListView(ListView):
+    model = Tag

@@ -5,12 +5,22 @@
 {% block content %}
 <h1>My RPG Books</h1>
 
-
-<ul>
+<div class="row">
   {% for book in books %}
-
-  <li>{{book.title}} <a href="{% url 'books:book_detail' book.slug %}">See book detail</a></li>
-
+  <div class="card m-2" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{book.title}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">System: {{book.system}}</h6>
+      <p class="card-text">Tags:
+      <ul>
+        {% for tag in book.tags.all %}
+        <li>{{tag}}</li>
+        {% endfor %}
+      </ul>
+      </p>
+      <a href="{% url 'books:book_detail' book.slug %}">See book detail</a>
+    </div>
+  </div>
   {% endfor %}
-</ul>
+</div>
 {% endblock %}

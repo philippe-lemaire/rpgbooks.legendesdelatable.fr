@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}My RPG Books{% endblock title %}
+{% block content %}
+<h1>Tags</h1>
+
+<ul>
+  {% for tag in tag_list %}
+  <li>{{tag}}</li>
+  {% endfor %}
+</ul>
+{% endblock %}
