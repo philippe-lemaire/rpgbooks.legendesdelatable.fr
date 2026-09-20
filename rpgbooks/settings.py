@@ -133,6 +133,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+MEDIA_URL = "media/"
+MEDIA_ROOT = "media"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -143,3 +146,10 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # whitenoise
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+FILE_UPLOAD_HANDLERS = [
+    "django.core.files.uploadhandler.TemporaryFileUploadHandler",
+]
+FILE_VALIDATOR_ERROR_MESSAGE = (
+    "{current_file_name} is invalid. File size must be below 5MB."
+)
