@@ -18,17 +18,22 @@ def fix_choice_display(qs):
         book.display_book_type = book.get_book_type_display()
 
 
-class BooksIndexView(ListView):
-    context_object_name = "books"
-    model = Book
-    paginate_by = 10
-
-
 def book_list_view(request):
     books = Book.objects.all()
     fix_choice_display(books)
     template_name = "books/book_list.html"
     context = {"books": books}
+    return render(request, template_name, context)
+
+
+def books_by_want_to_run(request):
+    queryset = Book.objects.filter(want_to_run=True)
+    fix_choice_display(queryset)
+    template_name = "books/book_list.html"
+    context = {
+        "books": queryset,
+        "filtered_by": "Want to run",
+    }
     return render(request, template_name, context)
 
 

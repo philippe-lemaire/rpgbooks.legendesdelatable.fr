@@ -3,41 +3,51 @@
 {% load static %}
 {% block title %}{{book.title}}{% endblock title %}
 {% block content %}
-<h1>{{book.title}}</h1>
+
+<a href="/">Home</a> > <a href="{% url 'books:index' %}">Books</a> > <span>{{book.title}}</span>
 
 
-{% if book.cover %}
-<img class="rounded img-fluid portrait" src="{% get_media_prefix %}{{book.cover}}" alt="Cover of {{book.title}}.">
-{% endif %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
 
-<hr>
-{{book.blurb|safe}}
+      {% if book.cover %}
+      <img class="rounded img-fluid portrait" src="{% get_media_prefix %}{{book.cover}}" alt="Cover of {{book.title}}.">
+      {% endif %}
+    </div>
+    <div class="col">
+      <h1>{{book.title}}</h1>
+      {{book.blurb|safe}}
 
-<hr>
-<table class="table table-borderless">
-  <tr>
-    <td>System</td>
-    <td><a href="{% url 'books:books_by_system' book.system.slug %}">{{book.system}}</a></td>
-  </tr>
-  <tr>
-    <td>Type</td>
-    <td><a href="{% url 'books:books_by_book_type' book.book_type %}">{{book.display_book_type}}</a></td>
-  </tr>
-  <tr>
-    <td>Tags</td>
-    <td>
-      <ul class="list-inline">
-        {% for tag in book.tags.all %}
-        <li class="list-inline-item"><a href="{% url 'books:books_by_tag' tag.slug %}">{{tag}}</a></li>
-        {% endfor %}
-      </ul>
-    </td>
-  </tr>
-</table>
-<hr>
+      <hr>
+      <table class="table table-borderless">
+        <tr>
+          <td>System</td>
+          <td><a href="{% url 'books:books_by_system' book.system.slug %}">{{book.system}}</a></td>
+        </tr>
+        <tr>
+          <td>Type</td>
+          <td><a href="{% url 'books:books_by_book_type' book.book_type %}">{{book.display_book_type}}</a></td>
+        </tr>
+        <tr>
+          <td>Tags</td>
+          <td>
+            <ul class="list-inline">
+              {% for tag in book.tags.all %}
+              <li class="list-inline-item"><a href="{% url 'books:books_by_tag' tag.slug %}">{{tag}}</a></li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+      </table>
+      <hr>
 
-{% if book.want_to_run %}
-<h5>Want to run </h5>
-✅
-{% endif %}
+      {% if book.want_to_run %}
+      <h5>Want to run </h5>
+      ✅
+      {% endif %}
+    </div>
+  </div>
+</div><!--container-->
+
 {% endblock %}
