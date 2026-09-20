@@ -15,7 +15,7 @@
       <p class="card-text">Tags:
       <ul>
         {% for tag in book.tags.all %}
-        <li>{{tag}}</li>
+        <li><a href="{% url 'books:books_by_tag' tag.slug %}">{{tag}}</a></li>
         {% endfor %}
       </ul>
       </p>

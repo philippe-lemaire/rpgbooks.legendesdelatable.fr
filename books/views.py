@@ -27,6 +27,14 @@ def books_by_system_view(request, slug):
     return render(request, template_name, context)
 
 
+def books_by_tag_view(request, slug):
+    tag = Tag.objects.filter(slug=slug)[0].slug
+    queryset = Book.objects.filter(tags__slug=tag)
+    template_name = "books/book_list.html"
+    context = {"books": queryset}
+    return render(request, template_name, context)
+
+
 class BookDetailView(DetailView):
     model = Book
 
