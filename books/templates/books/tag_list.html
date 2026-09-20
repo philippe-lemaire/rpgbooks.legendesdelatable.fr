@@ -7,7 +7,7 @@
 
 <ul>
   {% for tag in tag_list %}
-  <li>{{tag}}</li>
+  <li><a href="{% url 'books:books_by_tag' tag.slug %}">{{tag}}</a></li>
   {% endfor %}
 </ul>
 {% endblock %}

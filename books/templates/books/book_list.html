@@ -5,21 +5,21 @@
 {% block content %}
 <h1>My RPG Books</h1>
 
-<div class="row">
+<div class="row mt-5">
   {% for book in books %}
   <div class="card m-2" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">{{book.title}}</h5>
-      <h6 class="card-subtitle mb-2 text-muted"><a href="{% url 'books:books_by_system' book.system.slug %}">System:
-          {{book.system}}</a></h6>
+      <h5 class="card-title"> <a href="{% url 'books:book_detail' book.slug %}">{{book.title}}</a></h5>
+      <h6 class="card-subtitle mb-2 text-muted">System:
+        <a href="{% url 'books:books_by_system' book.system.slug %}">{{book.system}}</a>
+      </h6>
       <p class="card-text">Tags:
-      <ul>
+      <ul class="list-inline">
         {% for tag in book.tags.all %}
-        <li><a href="{% url 'books:books_by_tag' tag.slug %}">{{tag}}</a></li>
+        <li class="list-inline-item"><a href="{% url 'books:books_by_tag' tag.slug %}">{{tag}}</a></li>
         {% endfor %}
       </ul>
       </p>
-      <a href="{% url 'books:book_detail' book.slug %}">See book detail</a>
     </div>
   </div>
   {% endfor %}
