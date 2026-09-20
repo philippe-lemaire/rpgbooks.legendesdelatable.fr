@@ -11,18 +11,32 @@
 <img class="rounded img-fluid portrait" src="{% get_media_prefix %}{{book.cover}}" alt="Cover of {{book.title}}.">
 {% endif %}
 
+<hr>
 <h2>Blurb</h2>
 {{book.blurb|safe}}
 
-<h2>System</h2>
-{{book.system}}
-
-<h2>Tags</h2>
-<ul>
-  {% for tag in book.tags.all %}
-  <li>{{tag}}</li>
-  {% endfor %}
-</ul>
+<hr>
+<table class="table table-borderless">
+  <tr>
+    <td>System</td>
+    <td><a href="{% url 'books:books_by_system' book.system.slug %}">{{book.system}}</a></td>
+  </tr>
+  <tr>
+    <td>Type</td>
+    <td>{{book.display_book_type}}</td>
+  </tr>
+  <tr>
+    <td>Tags</td>
+    <td>
+      <ul class="list-inline">
+        {% for tag in book.tags.all %}
+        <li class="list-inline-item"><a href="{% url 'books:books_by_tag' tag.slug %}">{{tag}}</a></li>
+        {% endfor %}
+      </ul>
+    </td>
+  </tr>
+</table>
+<hr>
 
 {% if book.want_to_run %}
 <h2>Want to run </h2>

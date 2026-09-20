@@ -36,8 +36,14 @@ def books_by_tag_view(request, slug):
     return render(request, template_name, context)
 
 
-class BookDetailView(DetailView):
-    model = Book
+def book_detail_view(request, slug):
+    book = Book.objects.get(slug=slug)
+    book.display_book_type = book.get_book_type_display()
+    template_name = "books/book_detail.html"
+    context = {
+        "book": book,
+    }
+    return render(request, template_name, context)
 
 
 class SystemsListView(ListView):
