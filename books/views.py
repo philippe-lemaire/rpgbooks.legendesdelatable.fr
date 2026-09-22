@@ -95,6 +95,16 @@ def book_detail_view(request, slug):
 class SystemsListView(ListView):
     model = System
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["book_types"] = Book.BOOK_TYPE_CHOICES
+        return context
+
 
 class TagsListView(ListView):
     model = Tag
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["book_types"] = Book.BOOK_TYPE_CHOICES
+        return context
