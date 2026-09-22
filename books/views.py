@@ -36,7 +36,7 @@ def books_by_want_to_run(request):
     context = {
         "books": queryset,
         "filtered_by": "Want to run",
-        "book_type": Book.BOOK_TYPE_CHOICES,
+        "book_types": Book.BOOK_TYPE_CHOICES,
     }
     return render(request, template_name, context)
 
