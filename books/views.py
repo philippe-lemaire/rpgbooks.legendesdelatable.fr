@@ -19,7 +19,7 @@ def fix_choice_display(qs):
 
 
 def book_list_view(request):
-    books = Book.objects.all()
+    books = Book.objects.all().order_by('system')
     fix_choice_display(books)
     template_name = "books/book_list.html"
     context = {"books": books}
@@ -27,7 +27,7 @@ def book_list_view(request):
 
 
 def books_by_want_to_run(request):
-    queryset = Book.objects.filter(want_to_run=True)
+    queryset = Book.objects.filter(want_to_run=True).order_by('system')
     fix_choice_display(queryset)
     template_name = "books/book_list.html"
     context = {
@@ -39,7 +39,7 @@ def books_by_want_to_run(request):
 
 def books_by_system_view(request, slug):
     system = System.objects.filter(slug=slug)[0]
-    queryset = Book.objects.filter(system=system)
+    queryset = Book.objects.filter(system=system).order_by('system')
     fix_choice_display(queryset)
     template_name = "books/book_list.html"
     context = {"books": queryset, "filtered_by": f"System: {system}"}
@@ -47,7 +47,7 @@ def books_by_system_view(request, slug):
 
 
 def books_by_book_type_view(request, book_type):
-    queryset = Book.objects.filter(book_type=book_type)
+    queryset = Book.objects.filter(book_type=book_type).order_by('system')
     fix_choice_display(queryset)
     template_name = "books/book_list.html"
     context = {
@@ -60,7 +60,7 @@ def books_by_book_type_view(request, book_type):
 def books_by_tag_view(request, slug):
     tag = Tag.objects.filter(slug=slug)[0]
     slug = tag.slug
-    queryset = Book.objects.filter(tags__slug=slug)
+    queryset = Book.objects.filter(tags__slug=slug).order_by('system')
     fix_choice_display(queryset)
     template_name = "books/book_list.html"
     context = {"books": queryset, "filtered_by": f"Tag: {tag}"}
@@ -68,7 +68,7 @@ def books_by_tag_view(request, slug):
 
 
 def book_detail_view(request, slug):
-    book = Book.objects.get(slug=slug)
+    book = Book.objects.get(slug=slug).order_by('system')
     book.display_book_type = book.get_book_type_display()
     template_name = "books/book_detail.html"
     context = {
