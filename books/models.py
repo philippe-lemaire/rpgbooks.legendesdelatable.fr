@@ -51,6 +51,7 @@ class Book(models.Model):
     )  # => 5 MB)
     BOOK_TYPE_CHOICES = (
         ("CRB", "Core Rule Book"),
+        ("STS", "Starter Set"),
         ("SPB", "Splat Book"),
         ("SB", "Setting Book"),
         ("CB", "Campaign Book"),
