@@ -68,7 +68,7 @@ def books_by_tag_view(request, slug):
 
 
 def book_detail_view(request, slug):
-    book = Book.objects.get(slug=slug).order_by('system')
+    book = Book.objects.get(slug=slug)
     book.display_book_type = book.get_book_type_display()
     template_name = "books/book_detail.html"
     context = {
