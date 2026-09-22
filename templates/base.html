@@ -39,7 +39,6 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{% url 'books:index' %}">All books</a>
-              <a class="dropdown-item" href="{% url 'books:books_by_want_to_run'%}">Games I want to run</a>
               {% for book_type, book_type_name in book_types %}
               <a class="dropdown-item" href="{% url 'books:books_by_book_type' book_type %}">{{book_type_name}}s</a>
               {% endfor %}
