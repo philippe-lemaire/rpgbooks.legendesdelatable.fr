@@ -10,8 +10,9 @@
 <div class="row mt-5">
   {% for book in books %}
   <div class="card m-2" style="width: 18rem;">
+    <a href="{% url 'books:book_detail' book.slug %}">
   <img class="card-img-top" width="286px" src="{% get_media_prefix %}{{book.cover}}" alt="Cover of {{book.title}}.">
-  <div class="card-body">
+  <div class="card-body"></a>
     <h5 class="card-title"> <a href="{% url 'books:book_detail' book.slug %}">{{book.title}}</a></h5>
     <h6 class="card-subtitle mb-2 text-muted">System:
         <a href="{% url 'books:books_by_system' book.system.slug %}">{{book.system}}</a>
