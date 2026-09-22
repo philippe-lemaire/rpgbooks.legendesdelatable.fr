@@ -8,19 +8,21 @@
     books</a></p>{% endif %}
 
 <div class="row mt-5">
+  {% if books %}
   {% for book in books %}
   <div class="card m-2" style="width: 18rem;">
     <a href="{% url 'books:book_detail' book.slug %}">
-  <img class="card-img-top" width="286px" src="{% get_media_prefix %}{{book.cover}}" alt="Cover of {{book.title}}.">
-  <div class="card-body"></a>
+      <img class="card-img-top" width="286px" src="{% get_media_prefix %}{{book.cover}}" alt="Cover of {{book.title}}.">
+      <div class="card-body">
+    </a>
     <h5 class="card-title"> <a href="{% url 'books:book_detail' book.slug %}">{{book.title}}</a></h5>
     <h6 class="card-subtitle mb-2 text-muted">System:
-        <a href="{% url 'books:books_by_system' book.system.slug %}">{{book.system}}</a>
-      </h6>
-      <h6 class="card-subtitle mb-2 text-muted">Book type:
-        <a href="{% url 'books:books_by_book_type' book.book_type %}">{{book.display_book_type}}</a>
-      </h6>
-      <!--<p class="card-text">Tags:
+      <a href="{% url 'books:books_by_system' book.system.slug %}">{{book.system}}</a>
+    </h6>
+    <h6 class="card-subtitle mb-2 text-muted">Book type:
+      <a href="{% url 'books:books_by_book_type' book.book_type %}">{{book.display_book_type}}</a>
+    </h6>
+    <!--<p class="card-text">Tags:
       <ul class="list-inline">
         {% for tag in book.tags.all %}
         <li class="list-inline-item"><a href="{% url 'books:books_by_tag' tag.slug %}">{{tag}}</a></li>
@@ -30,6 +32,9 @@
     -->
   </div>
 </div>
-  {% endfor %}
+{% endfor %}
+{% else %}
+<p>Sorry, your books are in another castle…</p>
+{% endif %}
 </div>
 {% endblock %}
