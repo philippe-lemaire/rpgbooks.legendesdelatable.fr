@@ -26,6 +26,10 @@
           <td><a href="{% url 'books:books_by_system' book.system.slug %}">{{book.system}}</a></td>
         </tr>
         <tr>
+          <td>Author(s)</td>
+          <td><a>{{book.authors}}</a></td>
+        </tr>
+        <tr>
           <td>Type</td>
           <td><a href="{% url 'books:books_by_book_type' book.book_type %}">{{book.display_book_type}}</a></td>
         </tr>
