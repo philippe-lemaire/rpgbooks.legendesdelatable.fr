@@ -56,6 +56,7 @@ class Book(models.Model):
         ("SB", "Setting Book"),
         ("CB", "Campaign Book"),
         ("MOD", "Module"),
+        ("BES", "Bestiary"),
     )
     book_type = models.CharField(
         max_length=3, choices=BOOK_TYPE_CHOICES, default=BOOK_TYPE_CHOICES[0][0]
