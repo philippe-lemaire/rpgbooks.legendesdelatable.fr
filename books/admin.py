@@ -5,7 +5,9 @@ from .models import Book, Tag, System
 
 
 class BookAdmin(admin.ModelAdmin):
-    search_fields = ["title", "system"]
+    search_fields = [
+        "title",
+    ]
     list_display = ["title", "system", "authors"]
 
 
