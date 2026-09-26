@@ -111,5 +111,7 @@ class TagsListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["book_types"] = Book.BOOK_TYPE_CHOICES
-
+        tags = context["tag_list"]
+        for tag in tags:
+            tag.books_count = Book.objects.filter(tags__name=tag).count()
         return context
