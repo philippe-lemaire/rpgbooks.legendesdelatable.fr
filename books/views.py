@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login
+from django.db.models import Count
 
 from .models import Book, System, Tag
 
@@ -98,6 +99,9 @@ class SystemsListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["book_types"] = Book.BOOK_TYPE_CHOICES
+        systems = context["system_list"]
+        for system in systems:
+            system.books_count = Book.objects.filter(system__name=system).count()
         return context
 
 
@@ -107,4 +111,5 @@ class TagsListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["book_types"] = Book.BOOK_TYPE_CHOICES
+
         return context
