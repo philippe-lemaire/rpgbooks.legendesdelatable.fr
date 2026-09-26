@@ -50,6 +50,13 @@
       <h5>Want to run </h5>
       ✅
       {% endif %}
+
+      {% if request.user.is_authenticated %}
+      <p class="mt-2">
+        <a href="{% url 'books:book_edit' book.slug %}" class="btn btn-warning active" role="button"
+          aria-pressed="true">Edit book</a>
+      </p>
+      {% endif %}
     </div>
   </div>
 </div><!--container-->

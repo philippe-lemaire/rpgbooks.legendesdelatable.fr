@@ -7,9 +7,9 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login
-from django.db.models import Count
 
 from .models import Book, System, Tag
+from .forms import BookForm
 
 # Create your views here.
 
@@ -90,6 +90,24 @@ def book_detail_view(request, slug):
         "book": book,
         "book_types": Book.BOOK_TYPE_CHOICES,
     }
+    return render(request, template_name, context)
+
+
+@login_required
+def book_edit_view(request, slug):
+    book = Book.objects.get(slug=slug)
+    form = BookForm(request.POST or None, instance=book)
+    template_name = "books/book_edit.html"
+    context = {"form": form, "book": book}
+
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            messages.success(request, message="Book updated.")
+            redirect_uri = request.build_absolute_uri(
+                reverse("books:book_detail", kwargs={"slug": book.slug})
+            )
+            return HttpResponseRedirect(redirect_uri)
     return render(request, template_name, context)
 
 
