@@ -96,7 +96,7 @@ def book_detail_view(request, slug):
 @login_required
 def book_edit_view(request, slug):
     book = Book.objects.get(slug=slug)
-    form = BookForm(request.POST or None, instance=book)
+    form = BookForm(request.POST or None, request.FILES or None, instance=book)
     template_name = "books/book_edit.html"
     context = {"form": form, "book": book}
 
