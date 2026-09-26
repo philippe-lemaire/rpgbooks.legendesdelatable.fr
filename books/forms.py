@@ -7,4 +7,4 @@ class BookForm(ModelForm):
     class Meta:
         model = Book
         exclude = []
-        widgets = {"blurb": TinyMCE(attrs={"cols": 80, "rows": 30})}
+        widgets = {"content": TinyMCE(attrs={"cols": 80, "rows": 30})}

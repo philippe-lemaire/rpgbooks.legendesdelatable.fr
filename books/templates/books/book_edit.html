@@ -4,9 +4,8 @@
 {% block title %}Edit {{book.title}}{% endblock title %}
 {% block content %}
 
-<a href="/">Home</a> > <a href="{% url 'books:index' %}">Books</a> > <span>{{book.title}}</span>
 
-<h1>Edit {{book.title}}</h1>
+<h1>Editing Book: {{book.title}}</h1>
 
 <form action="{% url 'books:book_edit' book.slug %}" method="post" enctype='multipart/form-data'>
   {% csrf_token %}
