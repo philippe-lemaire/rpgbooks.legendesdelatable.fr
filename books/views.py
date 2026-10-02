@@ -24,7 +24,7 @@ def book_list_view(request):
     books = Book.objects.all().order_by("system", "title")
     fix_choice_display(books)
     template_name = "books/book_list.html"
-    paginator = Paginator(books, 2)  # Show 25 book per page.
+    paginator = Paginator(books, 25)  # Show 25 book per page.
 
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
