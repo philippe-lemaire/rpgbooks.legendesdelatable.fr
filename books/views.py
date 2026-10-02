@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login
+from django.core.paginator import Paginator
 
 from .models import Book, System, Tag
 from .forms import BookForm
@@ -23,8 +24,12 @@ def book_list_view(request):
     books = Book.objects.all().order_by("system", "title")
     fix_choice_display(books)
     template_name = "books/book_list.html"
+    paginator = Paginator(books, 2)  # Show 25 book per page.
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     context = {
-        "books": books,
+        "books": page_obj,
         "book_types": Book.BOOK_TYPE_CHOICES,
     }
     return render(request, template_name, context)

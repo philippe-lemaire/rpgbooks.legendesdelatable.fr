@@ -22,14 +22,6 @@
     <h6 class="card-subtitle mb-2 text-muted">Book type:
       <a href="{% url 'books:books_by_book_type' book.book_type %}">{{book.display_book_type}}</a>
     </h6>
-    <!--<p class="card-text">Tags:
-      <ul class="list-inline">
-        {% for tag in book.tags.all %}
-        <li class="list-inline-item"><a href="{% url 'books:books_by_tag' tag.slug %}">{{tag}}</a></li>
-        {% endfor %}
-      </ul>
-      </p>
-    -->
   </div>
 </div>
 {% endfor %}
@@ -37,4 +29,40 @@
 <p>Sorry, your books are in another castle…</p>
 {% endif %}
 </div>
+
+<!-- Pagination -->
+{% if books.paginator.num_pages > 1 %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {% if books.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ books.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+    {% for _ in ''|ljust:books.paginator.num_pages %}
+
+    {% if books.number == forloop.counter %}
+    <li class="page-item active">
+      <a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }} <span
+          class="sr-only">(current)</span></a>
+      {% else %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+      {% endif %}
+    </li>
+    {% endfor %}
+
+    {% if books.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+<!-- Paginator end -->
 {% endblock %}
